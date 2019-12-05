@@ -30,5 +30,6 @@ jobs:
         uses: docker://peaceiris/gh-pages:v2.5.0
         env:
           PERSONAL_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+          REACT_APP_API_KEY: ${{ secrets.REACT_APP_API_KEY }}
           PUBLISH_BRANCH: gh-pages
           PUBLISH_DIR: ./build
