@@ -3,7 +3,9 @@ import {Link, useParams} from 'react-router-dom'
 import ReactSlider from "react-slick";
 import NewsCard from "../news-card";
 import {INews} from 'services/news'
-import {MdExpandMore} from 'react-icons/md'
+import {MdExpandLess, MdExpandMore} from 'react-icons/md'
+import {Collapse} from 'react-collapse'
+
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
@@ -63,23 +65,32 @@ interface ISlider {
 
 const Slider: FunctionComponent<ISlider> = ({items, category}) => {
     const {code} = useParams()
+    const [isOpened, setOpened] = React.useState(true)
+    const onToggle = React.useCallback(() => setOpened(p => !p), [setOpened])
 
     return <section>
-        <Link className='cursor-pointer hover:text-teal-300' to={`/${code}/categories/${category}`}>
-            <h1 className='text-2xl capitalize my-5 inline-flex items-center'>{category} <MdExpandMore
-                className='ml-1 text-3xl'/></h1>
-        </Link>
-        <ReactSlider {...settings}>
-            {items.map((item, index) => <div key={index} className='h-full p-2'>
-                <Link to={{
-                    pathname: `/${code}/news/${item.source.id}`,
-                    state: item
-                }
-                } className="cursor-pointer">
-                    <NewsCard {...item}/>
-                </Link>
-            </div>)}
-        </ReactSlider>
+        <header className='inline-flex items-center'>
+            <Link className='cursor-pointer hover:text-teal-300' to={`/${code}/categories/${category}`}>
+                <h1 className='text-2xl capitalize my-5 inline-flex items-center'>{category} </h1>
+            </Link>
+            <button onClick={onToggle}
+                    className='ml-2 hover:bg-teal-400 text-base font-bold py-4 px-4 rounded-full focus:outline-none text-lg'>
+                {isOpened ? <MdExpandLess size={24}/> : <MdExpandMore size={24}/>}
+            </button>
+        </header>
+        <Collapse isOpened={isOpened}>
+            <ReactSlider {...settings}>
+                {items.map((item, index) => <div key={index} className='h-full p-2'>
+                    <Link to={{
+                        pathname: `/${code}/news/${item.source.id}`,
+                        state: item
+                    }
+                    } className="cursor-pointer">
+                        <NewsCard {...item}/>
+                    </Link>
+                </div>)}
+            </ReactSlider>
+        </Collapse>
     </section>
 }
 

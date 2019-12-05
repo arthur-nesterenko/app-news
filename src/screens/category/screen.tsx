@@ -4,7 +4,6 @@ import {useAsync} from "react-use";
 import newsApi, {Category} from "services/news";
 import NewsList from "../../shared/components/news-list";
 import Loader from 'shared/components/loader'
-import {MdExpandLess} from 'react-icons/md'
 
 const Screen = () => {
     const {goBack} = useHistory()
@@ -28,9 +27,8 @@ const Screen = () => {
             Top
 
             <strong className='mx-2'>{category} </strong> news
-            
             from {code === 'us' ? 'United States' : 'Great Britain'}
-            <MdExpandLess className='ml-1'/></h1>
+        </h1>
         {state.loading ? <Loader/> : <NewsList items={state.value || []}/>}
         <div className='flex justify-start items-center py-5'>
             <button onClick={goBack} className='cursor-pointer outline-none focus:outline-none'>

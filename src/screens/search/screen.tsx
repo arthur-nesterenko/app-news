@@ -1,6 +1,6 @@
 import React from 'react'
 import SearchInput from "./components/search-input";
-import {useAsyncFn} from "react-use";
+import {useAsyncFn, useUpdateEffect} from "react-use";
 import {useParams} from 'react-router-dom'
 import newsApi from 'services/news'
 import NewsList from "../../shared/components/news-list";
@@ -19,6 +19,11 @@ const Screen = () => {
             q
         })
     }, [code]);
+
+    useUpdateEffect(() => {
+        fetch(query)
+    },[code]
+)
 
     const onChange = React.useCallback((q: any) => {
         setQuery(q)
