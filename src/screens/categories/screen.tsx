@@ -19,9 +19,6 @@ const Screen = () => {
         return await getCategories(code);
     }, [code]);
 
-    console.log('state', state)
-
-
     return <div className='mb-5 px-12'>
         <h1 className='sm:text-center md:text-left text-2xl'>Top 5 news by categories from <span
             className='uppercase'>{code}</span></h1>
