@@ -11,10 +11,16 @@ jobs:
     steps:
       - uses: actions/checkout@master
 
+
       - name: Setup Node
         uses: actions/setup-node@v1
         with:
           node-version: '10.x'
+
+      - name: set environment variables
+        uses: allenevans/set-env@v1.0.0
+        with:
+          REACT_APP_API_KEY: ${{ secrets.REACT_APP_API_KEY }}
 
       - name: Cache dependencies
         uses: actions/cache@v1
@@ -30,6 +36,5 @@ jobs:
         uses: docker://peaceiris/gh-pages:v2.5.0
         env:
           PERSONAL_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
-          REACT_APP_API_KEY: ${{ secrets.REACT_APP_API_KEY }}
           PUBLISH_BRANCH: gh-pages
           PUBLISH_DIR: ./build
