@@ -6,6 +6,7 @@ import newsApi from 'services/news'
 import NewsList from "../../shared/components/news-list";
 import Loader from 'shared/components/loader'
 
+
 const Screen = () => {
 
     const [query, setQuery] = React.useState('');
@@ -19,7 +20,8 @@ const Screen = () => {
         })
     }, [code]);
 
-    const onEnter = React.useCallback((q: any) => {
+    const onChange = React.useCallback((q: any) => {
+        setQuery(q)
         fetch(q)
     }, [fetch])
 
@@ -28,7 +30,7 @@ const Screen = () => {
         <h1 className='text-base text-3xl capitalize p-2'>Search Top news by
             from {code === 'us' ? 'United States' : 'Great Britain'} term:</h1>
         <div className='sm:w-full md:w-1/2  mx-auto px-4'>
-            <SearchInput onEnter={onEnter} value={query} onChange={setQuery}/>
+            <SearchInput value={query} onChange={onChange}/>
         </div>
         {state.loading ? <Loader/>
             : (Array.isArray(state.value) && state.value.length > 0) ?

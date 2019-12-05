@@ -3,7 +3,7 @@ import React, {FunctionComponent} from "react";
 
 interface ISearchInput {
     onChange: (value: string) => void;
-    onEnter: (value: string) => void;
+    onEnter?: (value: string) => void;
     value: string
 }
 
@@ -11,7 +11,7 @@ const SearchInput: FunctionComponent<ISearchInput> = ({onChange, value, onEnter}
 
     const onSubmit = React.useCallback((e) => {
         e.preventDefault();
-        onEnter(value)
+        onEnter && onEnter(value)
     }, [onEnter, value])
 
     const handleChange = React.useCallback((e) => onChange(e.currentTarget.value), [onChange])

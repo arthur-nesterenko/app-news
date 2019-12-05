@@ -14,7 +14,9 @@ const Screen = () => {
     return <article className='container mx-auto px-4 mt-5'>
         <header>
             <h1 className='text-base text-2xl my-2'>{state.title}</h1>
+            {state.urlToImage &&
             <img className='w-full object-contain' src={state.urlToImage} alt={state.title}/>
+            }
         </header>
         <p className='my-3 text-black'>{state.content}</p>
         <footer className='py-4'>

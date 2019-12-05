@@ -3,6 +3,7 @@ import {Link, useParams} from 'react-router-dom'
 import ReactSlider from "react-slick";
 import NewsCard from "../news-card";
 import {INews} from 'services/news'
+import {MdExpandMore} from 'react-icons/md'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
@@ -65,7 +66,8 @@ const Slider: FunctionComponent<ISlider> = ({items, category}) => {
 
     return <section>
         <Link className='cursor-pointer hover:text-teal-300' to={`/${code}/categories/${category}`}>
-            <h1 className='text-2xl capitalize my-5'>{category}</h1>
+            <h1 className='text-2xl capitalize my-5 inline-flex items-center'>{category} <MdExpandMore
+                className='ml-1 text-3xl'/></h1>
         </Link>
         <ReactSlider {...settings}>
             {items.map((item, index) => <div key={index} className='h-full p-2'>
