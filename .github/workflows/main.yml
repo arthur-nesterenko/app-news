@@ -21,6 +21,7 @@ jobs:
         uses: allenevans/set-env@v1.0.0
         with:
           REACT_APP_API_KEY: ${{ secrets.REACT_APP_API_KEY }}
+          PUBLIC_URL: '/app-news'
 
       - name: Cache dependencies
         uses: actions/cache@v1

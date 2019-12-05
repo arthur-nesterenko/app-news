@@ -10,7 +10,7 @@ const App: React.FC = () => {
     return (
         <div className='container mx-auto mt-20 px-5'>
             <ErrorBoundary>
-                <Router>
+                <Router basename={process.env.PUBLIC_URL}>
                     <Header/>
                     <main className='bg-gray-200 p-2'>
                         <Suspense fallback={<Loader/>}>
